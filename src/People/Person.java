@@ -15,7 +15,8 @@ public class Person {
         this.xLoc = xLoc;
     }
 
-    public int getyLoc() {
+    public int getyLoc()
+    {
         return this.yLoc;
     }
 

@@ -20,6 +20,16 @@ public class Room {
         x.setyLoc(this.yLoc);
     }
 
+    public String toString()
+    {
+        if(occupant==null) {
+            return " ";
+        }
+        else{
+            return "x";
+        }
+    }
+
     public void leaveRoom(Person x) {
         this.occupant = null;
     }

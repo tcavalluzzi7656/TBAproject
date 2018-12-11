@@ -13,25 +13,17 @@ public class Runner {
     }
 
     public static void main(String[] args) {
-        Room[][] building = new Room[5][5];
-
-        for(int x = 0; x < building.length; ++x) {
-            for(int y = 0; y < building[x].length; ++y) {
-                building[x][y] = new Room(x, y);
-            }
-        }
+        Board.create();
 
         Person player1 = new Person("FirstName", "FamilyName", 0, 0);
-        building[0][0].enterRoom(player1);
+        Board.map[0][0].enterRoom(player1);
         Scanner in = new Scanner(System.in);
 
         while(gameOn) {
             System.out.println("What would you like to do?");
-            Board.print();
+            Board.print(Board.map);
             String move = in.nextLine();
-            if (validMove(move, player1, building)) {
-                System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
-            } else {
+            if (!validMove(move, player1, Board.map)) {
                 System.out.println("Please choose a valid move.");
             }
         }

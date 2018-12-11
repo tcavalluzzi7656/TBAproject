@@ -1,16 +1,16 @@
 
 package Rooms;
 
+import People.Person;
+
 public class Board {
-    public Room[][] map;
+    public static Room[][] map = new Room[5][5];
 
-    public Board(Room[][] map) {
-        this.map = map;
-    }
 
-    public static void main(String[] args)
+
+    public static void create()
     {
-        Room[][] map = new Room[5][5];
+
 
         for(int x = 0; x < map.length; ++x) {
             for(int y = 0; y < map[x].length; ++y) {
@@ -21,14 +21,17 @@ public class Board {
 
 
     public static void print(Room[][] map) {
-        for(int i = 0; i < map.length; ++i) {
-            String line = "";
 
-            for(int x = 0; x < map[i].length; ++x) {
-                line = line + "[ ]";
+
+            for (int x = 0; x < map.length; ++x) {
+                String line = "";
+
+                for (int y = 0; y < map[x].length; ++y) {
+                    line = line + ("["+map[x][y].toString()+"]");
+
+                }
                 System.out.println(line);
             }
-        }
 
     }
 }
