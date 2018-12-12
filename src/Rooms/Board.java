@@ -10,13 +10,12 @@ public class Board {
 
     public static void create()
     {
-
-
         for(int x = 0; x < map.length; ++x) {
             for(int y = 0; y < map[x].length; ++y) {
                 map[x][y] = new Room(x, y);
             }
         }
+        map[4][4] = new KeyRoom(4,4);
     }
 
 

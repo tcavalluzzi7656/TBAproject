@@ -8,6 +8,23 @@ public class Room {
     int xLoc;
     int yLoc;
 
+    public int getxLoc() {
+        return this.xLoc;
+    }
+
+    public void setxLoc(int xLoc) {
+        this.xLoc = xLoc;
+    }
+
+    public int getyLoc()
+    {
+        return this.yLoc;
+    }
+
+    public void setyLoc(int yLoc) {
+        this.yLoc = yLoc;
+    }
+
     public Room(int x, int y) {
         this.xLoc = x;
         this.yLoc = y;
