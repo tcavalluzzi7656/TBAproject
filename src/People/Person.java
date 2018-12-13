@@ -7,6 +7,8 @@ public class Person {
     int xLoc;
     int yLoc;
 
+    public boolean key = false;
+
     public int getxLoc() {
         return this.xLoc;
     }

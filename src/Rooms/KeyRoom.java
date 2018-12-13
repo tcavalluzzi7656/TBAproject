@@ -25,9 +25,9 @@ public class KeyRoom extends Room {
 
     public void enterRoom(Person x) {
         if (this.key) {
-            System.out.println("You enter a dark, dank shack. There is an old looking key sitting upon a dusty table with only 2 legs.");
+            System.out.println("You enter a dark, foul smelling room. There is an old looking key sitting upon a dusty table that only has 2 legs.");
         } else {
-            System.out.println("You enter the shack. The table is still on the ground");
+            System.out.println("You enter the dark room. The table is still on the ground");
         }
 
         this.occupant = x;

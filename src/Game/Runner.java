@@ -35,7 +35,7 @@ public class Runner {
         in.close();
     }
 
-    public static boolean validMove(String move, Person p, Room[][] map, KeyRoom table) {
+    public static boolean validMove(String move, Person player1, Room[][] map, KeyRoom table) {
         move = move.toLowerCase().trim();
         byte var4 = -1;
         switch(move.hashCode()) {
@@ -54,55 +54,56 @@ public class Runner {
                     var4 = 2;
                 }
                 break;
+            case 102:
+                if (move.equals("take key")) {
+                    var4 = 4;
+                }
+                break;
             case 119:
                 if (move.equals("w")) {
                     var4 = 3;
                 }
-            case 102:
-                if (move.equals("take key")) {
-                    var4 = 5;
-                }
-                break;
         }
 
         switch(var4) {
             case 0:
-                if (p.getxLoc() > 0) {
-                    map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
-                    map[p.getxLoc() - 1][p.getyLoc()].enterRoom(p);
+                if (player1.getxLoc() > 0) {
+                    map[player1.getxLoc()][player1.getyLoc()].leaveRoom(player1);
+                    map[player1.getxLoc() - 1][player1.getyLoc()].enterRoom(player1);
                     return true;
                 }
 
                 return false;
 
-            case 5:
-                if ((p.getxLoc() == table.getxLoc())&&(p.getyLoc()==table.getyLoc())) {
+            case 4:
+                if ((player1.getxLoc() == table.getxLoc())&&(player1.getyLoc()==table.getyLoc())) {
                     table.key = false;
-                    System.out.println("You picked the key up off of the table. The minuscule chance in weight caused the table to go crashing down to the floor. Nice going.");
+                    player1.key=true;
+                    System.out.println("You picked the key up off of the table. The minuscule chance in weight caused the table to go crashing to the floor.");
                     return true;
                 }
                 return false;
 
             case 1:
-                if (p.getyLoc() < map[p.getyLoc()].length - 1) {
-                    map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
-                    map[p.getxLoc()][p.getyLoc() + 1].enterRoom(p);
+                if (player1.getyLoc() < map[player1.getyLoc()].length - 1) {
+                    map[player1.getxLoc()][player1.getyLoc()].leaveRoom(player1);
+                    map[player1.getxLoc()][player1.getyLoc() + 1].enterRoom(player1);
                     return true;
                 }
 
                 return false;
             case 2:
-                if (p.getxLoc() < map.length - 1) {
-                    map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
-                    map[p.getxLoc() + 1][p.getyLoc()].enterRoom(p);
+                if (player1.getxLoc() < map.length - 1) {
+                    map[player1.getxLoc()][player1.getyLoc()].leaveRoom(player1);
+                    map[player1.getxLoc() + 1][player1.getyLoc()].enterRoom(player1);
                     return true;
                 }
 
                 return false;
             case 3:
-                if (p.getyLoc() > 0) {
-                    map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
-                    map[p.getxLoc()][p.getyLoc() - 1].enterRoom(p);
+                if (player1.getyLoc() > 0) {
+                    map[player1.getxLoc()][player1.getyLoc()].leaveRoom(player1);
+                    map[player1.getxLoc()][player1.getyLoc() - 1].enterRoom(player1);
                     return true;
                 }
 
