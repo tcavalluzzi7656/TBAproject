@@ -4,7 +4,7 @@ package Rooms;
 import People.Person;
 
 public class KeyRoom extends Room {
-    public boolean key = true;
+    public static boolean key = true;
 
     public KeyRoom(int x, int y)
     {
@@ -24,7 +24,7 @@ public class KeyRoom extends Room {
     }
 
     public void enterRoom(Person x) {
-        if (this.key) {
+        if (key) {
             System.out.println("You enter a dark, foul smelling room. There is an old looking key sitting upon a dusty table that only has 2 legs.");
         } else {
             System.out.println("You enter the dark room. The table is still on the ground");

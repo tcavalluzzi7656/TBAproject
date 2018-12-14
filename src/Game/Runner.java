@@ -16,6 +16,7 @@ public class Runner {
     }
 
     public static void main(String[] args) {
+
         Board.create();
 
         Person player1 = new Person("FirstName", "FamilyName", 0, 0);
@@ -38,29 +39,29 @@ public class Runner {
     public static boolean validMove(String move, Person player1, Room[][] map, KeyRoom table) {
         move = move.toLowerCase().trim();
         byte var4 = -1;
-        switch(move.hashCode()) {
-            case 101:
-                if (move.equals("e")) {
+        switch(move) {
+            case "e":
+                {
                     var4 = 1;
                 }
                 break;
-            case 110:
-                if (move.equals("n")) {
+            case "n":
+                {
                     var4 = 0;
                 }
                 break;
-            case 115:
-                if (move.equals("s")) {
+            case "s":
+                {
                     var4 = 2;
                 }
                 break;
-            case 102:
-                if (move.equals("take key")) {
+            case "take key":
+                {
                     var4 = 4;
                 }
                 break;
-            case 119:
-                if (move.equals("w")) {
+            case "w":
+                {
                     var4 = 3;
                 }
         }
@@ -77,9 +78,13 @@ public class Runner {
 
             case 4:
                 if ((player1.getxLoc() == table.getxLoc())&&(player1.getyLoc()==table.getyLoc())) {
-                    table.key = false;
-                    player1.key=true;
-                    System.out.println("You picked the key up off of the table. The minuscule chance in weight caused the table to go crashing to the floor.");
+                    if(KeyRoom.key) {
+                        KeyRoom.key = false;
+                        Person.key = true;
+                        System.out.println("You picked the key up off of the table. The minuscule chance in weight caused the table to go crashing to the floor.");
+                        return true;
+                    }
+                    System.out.println("You already picked up the key. You're reminded of the carnage you created in doing so.");
                     return true;
                 }
                 return false;
@@ -113,7 +118,8 @@ public class Runner {
         }
     }
 
-    public static void gameOff() {
+    public static void gameOff()
+    {
         gameOn = false;
     }
 }

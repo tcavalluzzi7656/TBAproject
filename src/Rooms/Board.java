@@ -7,7 +7,7 @@ public class Board {
     public static Room[][] map = new Room[5][5];
 
 
-
+    public board
     public static void create()
     {
         for(int x = 0; x < map.length; ++x) {
