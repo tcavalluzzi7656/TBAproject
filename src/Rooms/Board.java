@@ -7,7 +7,7 @@ public class Board {
     public static Room[][] map = new Room[5][5];
 
 
-    public board
+
     public static void create()
     {
         for(int x = 0; x < map.length; ++x) {
@@ -15,7 +15,10 @@ public class Board {
                 map[x][y] = new Room(x, y);
             }
         }
-        map[4][4] = new KeyRoom(4,4);
+        map[0][4] = new KeyRoom(0,4);
+        map[1][1]= new TomeRoom(1,1);
+        map[2][3] = new OrbRoom(2,3);
+        map[4][2] = new ExitRoom(4,2);
     }
 
 

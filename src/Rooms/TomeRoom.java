@@ -3,20 +3,20 @@ package Rooms;
 
 import People.Person;
 
-public class KeyRoom extends Room {
-    public static boolean key = true;
+public class TomeRoom extends Room {
+    public static boolean tome = true;
 
-    public KeyRoom(int x, int y)
+    public TomeRoom(int x, int y)
     {
         super(x, y);
-        this.key = key;
+        this.tome = tome;
     }
 
     @Override
     public String toString()
     {
         if(occupant==null) {
-            return "K";
+            return "T";
         }
         else{
             return "x";
@@ -26,8 +26,8 @@ public class KeyRoom extends Room {
 
 
     public void enterRoom(Person x) {
-        if (key) {
-            System.out.println("You enter a dark, foul smelling room. There is an old looking key sitting upon a dusty table that only has 2 legs.");
+        if (tome) {
+            System.out.println("You enter a room lit by several candles. It is filled with several bookshelves, one of which in particular holds a book radiating immense pressure.");
         } else {
             System.out.println("You enter the dark room. The table is still on the ground");
         }

@@ -2,33 +2,57 @@
 package Game;
 
 import People.Person;
-import Rooms.Board;
-import Rooms.KeyRoom;
-import Rooms.Room;
+import Rooms.*;
 
 import java.security.Key;
 import java.util.Scanner;
 
 public class Runner {
     private static boolean gameOn = true;
-
+    static boolean random = false;
     public Runner() {
     }
 
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+
+        /*
+        System.out.println("Would you like to play with a random board, or a pre-made one?");
+        String move = in.nextLine();
+        if(move.equals("random"))
+        { random = true; }
+        else{random=false;}
+        */
+
+
+
 
         Board.create();
 
-        Person player1 = new Person("FirstName", "FamilyName", 0, 0);
-        KeyRoom table = new KeyRoom(4,4);
-        Board.map[0][0].enterRoom(player1);
-        Scanner in = new Scanner(System.in);
+        Person player1 = new Person("FirstName", "FamilyName", 4, 2);
+        KeyRoom table = new KeyRoom(0,4);
+        OrbRoom crystal = new OrbRoom(2,3);
+        TomeRoom book = new TomeRoom(1,1);
+
+
+
+        System.out.println("You are a lone elf who wanders the world, in search of some petty coin and thrills. In a local tavern, you meet a dwarf named Gundran, who claims to be your long lost cousin");
+        System.out.println("He tells you that he has a job that he would love you to complete for him, adn that he would reward you handsomely for completing it. He tells you a local story about three mystic artifacts that are supposed to be in the cave.");
+        System.out.println("The first, is the Skeleton Key, said to be able to open any lock. The second is the Philosophers Stone, said to be able to create matter from nothing. The third is the Tome of the Elders, said to give the reader the knowledge of 100 one-hundred year old men.");
+        System.out.println("You agree to help Gundran find the artifacts. Not only does he promise you a reward, you're hoping that you may be able to get some use out of the artifacts yourself.");
+        System.out.println("Gundran gives you a map of what the ruins most likely look like. He has marked the locations of all three artifacts, and reassures you that this should be an easy job with no threat of danger.");
+        System.out.println("He says he would do it himself if he didn't have his back problems, and if his favorite cousin wasn't there to help him with it.");
+        System.out.println("Gundran leads you to the ruins, and you descend deep into them as he returns back to town.");
+
+        Board.map[4][2].enterRoom(player1);
+
 
         while(gameOn) {
             System.out.println("What would you like to do?");
             Board.print(Board.map);
             String move = in.nextLine();
-            if (!validMove(move, player1, Board.map, table)) {
+            if (!validMove(move, player1, Board.map, table,book, crystal)) {
                 System.out.println("Please choose a valid move.");
             }
         }
@@ -36,13 +60,13 @@ public class Runner {
         in.close();
     }
 
-    public static boolean validMove(String move, Person player1, Room[][] map, KeyRoom table) {
+    public static boolean validMove(String move, Person player1, Room[][] map, KeyRoom table,TomeRoom book,OrbRoom crystal) {
         move = move.toLowerCase().trim();
         byte var4 = -1;
         switch(move) {
-            case "e":
+            case "w":
                 {
-                    var4 = 1;
+                    var4 = 3;
                 }
                 break;
             case "n":
@@ -60,9 +84,30 @@ public class Runner {
                     var4 = 4;
                 }
                 break;
-            case "w":
+            case "take tome":
+            {
+                var4 = 5;
+            }
+            break;
+            case "take orb":
+            {
+                var4 = 6;
+            }
+
+            break;
+            case "help":
+            {
+                var4 = 7;
+            }
+            break;
+            case "inventory":
+            {
+                var4 = 8;
+            }
+            break;
+            case "e":
                 {
-                    var4 = 3;
+                    var4 = 1;
                 }
         }
 
@@ -76,6 +121,51 @@ public class Runner {
 
                 return false;
 
+            case 8:
+                if (!Person.orb&&!Person.tome&&!Person.key)
+                {
+                    System.out.println("You currently don't have any artifacts. Get a move on!");
+                }
+                if (Person.orb&&!Person.tome&&!Person.key)
+                {
+                    System.out.println("You currently have the Philosopher's Stone. You still need the Skeleton Key and the Tome of the Elders!");
+                }
+                if (!Person.orb&&Person.tome&&!Person.key)
+                {
+                    System.out.println("You currently have the Tome of the Elders. You still need the Philosopher's Stone and the Skeleton Key!");
+                }
+                if (!Person.orb&&!Person.tome&&Person.key)
+                {
+                    System.out.println("You currently have the Skeleton Key. You still need the Philosopher's Stone and the Tome of the Elders!");
+                }
+
+                if (!Person.orb&&Person.tome&&Person.key)
+                {
+                    System.out.println("You currently have the Skeleton Key and the Tome of the Elders. You still need the Philosopher's Stone!");
+                }
+                if (Person.orb&&!Person.tome&&Person.key)
+                {
+                    System.out.println("You currently have the Skeleton Key and the Philosopher's Stone. You still need the Tome of the Elders!");
+                }
+                if (Person.orb&&Person.tome&&!Person.key)
+                {
+                    System.out.println("You currently have the Philosopher's Stone and the Tome of the Elders. You still need the Skeleton Key!");
+                }
+                if (Person.orb&&Person.tome&&Person.key)
+                {
+                    System.out.println("You have all the artifacts! Get to the exit and deliver them to Gundran!");
+                }
+                return true;
+            case 7:
+                System.out.println("Your goal is to retrieve all 3 artifacts within the ruins and bring them to the exit.");
+                System.out.println("Entering rooms that don't contain an artifact has a chance to be dangerous, so try to get from place to place as quickly as possible");
+                System.out.println("MOVEMENT: Use the commands n,s,e,w to go north, south, east and west respectively");
+                System.out.println("RETRIEVAL: Use the take command to take an artifact that you are in the room with into your possession.");
+                System.out.println("INVENTORY: Use the command inventory to check which artifacts you currently have.");
+                return true;
+
+
+
             case 4:
                 if ((player1.getxLoc() == table.getxLoc())&&(player1.getyLoc()==table.getyLoc())) {
                     if(KeyRoom.key) {
@@ -88,6 +178,33 @@ public class Runner {
                     return true;
                 }
                 return false;
+
+            case 5:
+                if ((player1.getxLoc() == book.getxLoc())&&(player1.getyLoc()==book.getyLoc())) {
+                    if(TomeRoom.tome) {
+                        TomeRoom.tome = false;
+                        Person.tome = true;
+                        System.out.println("You walk over to the book exerting the pressure and take it off of the shelf. You feel somewhat smarter (You are not any smarter then you were before)");
+                        return true;
+                    }
+                    System.out.println("You already picked up the tome. You decide to take a peek into it instead. After scanning the first page for a good few minutes, you realize that you cannot read.");
+                    return true;
+                }
+                return false;
+
+            case 6:
+                if ((player1.getxLoc() == crystal.getxLoc())&&(player1.getyLoc()==crystal.getyLoc())) {
+                    if(OrbRoom.orb) {
+                        OrbRoom.orb = false;
+                        Person.orb = true;
+                        System.out.println("You pull at the orb until it breaks loose from the crystal and goes flying out of your hands, slamming into a wall. It develops a small crack, but you assume its fine.");
+                        return true;
+                    }
+                    System.out.println("You already picked up the orb. You begin to worry that the crack you made may end up having severe consequences down the line.");
+                    return true;
+                }
+                return false;
+
 
             case 1:
                 if (player1.getyLoc() < map[player1.getyLoc()].length - 1) {

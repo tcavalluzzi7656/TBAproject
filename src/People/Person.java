@@ -8,6 +8,8 @@ public class Person {
     int yLoc;
 
     public static boolean key = false;
+    public static boolean orb = false;
+    public static boolean tome = false;
 
     public int getxLoc() {
         return this.xLoc;
