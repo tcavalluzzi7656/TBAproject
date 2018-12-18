@@ -182,6 +182,11 @@ public class Runner {
                         KeyRoom.key = false;
                         Person.key = true;
                         System.out.println("You picked the key up off of the table. The minuscule chance in weight caused the table to go crashing to the floor.");
+                        System.out.println(" .--.");
+                        System.out.println("/.-. '----------.");
+                        System.out.println("\\'-' .--\"--\"\"-\"-'");
+                        System.out.println(" '--'");
+                        System.out.println("You got the Skeleton Key!");
                         return true;
                     }
                     System.out.println("You already picked up the key. You're reminded of the carnage you created in doing so.");
@@ -195,6 +200,14 @@ public class Runner {
                         TomeRoom.tome = false;
                         Person.tome = true;
                         System.out.println("You walk over to the book exerting the pressure and take it off of the shelf. You feel somewhat smarter (You are not any smarter then you were before)");
+                        System.out.println("      __...--~~~~~-._   _.-~~~~~--...__\n" +
+                                "    //               `V'               \\\\ \n" +
+                                "   //                 |                 \\\\ \n" +
+                                "  //__...--~~~~~~-._  |  _.-~~~~~~--...__\\\\ \n" +
+                                " //__.....----~~~~._\\ | /_.~~~~----.....__\\\\\n" +
+                                "====================\\\\|//====================\n" +
+                                "                    `---`");
+                        System.out.println("You got the Tome of the Elders!");
                         return true;
                     }
                     System.out.println("You already picked up the tome. You decide to take a peek into it instead. After scanning the first page for a good few minutes, you realize that you cannot read.");
@@ -208,6 +221,16 @@ public class Runner {
                         OrbRoom.orb = false;
                         Person.orb = true;
                         System.out.println("You pull at the orb until it breaks loose from the crystal and goes flying out of your hands, slamming into a wall. It develops a small crack, but you assume its fine.");
+                        System.out.println("     ____\n" +
+                                "       .-\" +' \"-.\n" +
+                                "      /.'.'A_'*`.\\\n" +
+                                "     |:.*'/\\-\\. ':|\n" +
+                                "     |:.'.||\"|.'*:|\n" +
+                                "      \\:~^~^~^~^:/\n" +
+                                "       /`-....-'\\\n" +
+                                "      /          \\\n" +
+                                "      `-.,____,.-'\n");
+                        System.out.println("You got the Philosopher's Stone!");
                         return true;
                     }
                     System.out.println("You already picked up the orb. You begin to worry that the crack you made may end up having severe consequences down the line.");
