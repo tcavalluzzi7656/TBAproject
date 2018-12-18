@@ -3,6 +3,9 @@ package Rooms;
 
 import People.Person;
 
+//all comments in keyroom extend to the other artifact rooms as well
+
+
 public class KeyRoom extends Room {
     public static boolean key = true;
 
@@ -12,6 +15,8 @@ public class KeyRoom extends Room {
         this.key = key;
     }
 
+
+    //changes the tostring to the keyroom icon instead of being blank
     @Override
     public String toString()
     {
@@ -24,7 +29,7 @@ public class KeyRoom extends Room {
     }
 
 
-
+    //prints text for when the player enters before and after the artifact has been taken.
     public void enterRoom(Person x) {
         if (key) {
             System.out.println("You enter a dark, foul smelling room. There is an old looking key sitting upon a dusty table that only has 2 legs.");

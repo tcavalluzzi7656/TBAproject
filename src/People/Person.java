@@ -7,6 +7,8 @@ public class Person {
     int xLoc;
     int yLoc;
 
+
+    //inventory flags
     public static boolean key = false;
     public static boolean orb = false;
     public static boolean tome = false;

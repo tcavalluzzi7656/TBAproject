@@ -29,7 +29,7 @@ public class TomeRoom extends Room {
         if (tome) {
             System.out.println("You enter a room lit by several candles. It is filled with several bookshelves, one of which in particular holds a book radiating immense pressure.");
         } else {
-            System.out.println("You enter the dark room. The table is still on the ground");
+            System.out.println("You enter the room filled with bookshelves. You contemplate staying and reading a little bit, but the thought of education repulses you.");
         }
 
         this.occupant = x;

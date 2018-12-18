@@ -10,33 +10,37 @@ import java.util.Scanner;
 public class Runner {
     private static boolean gameOn = true;
     static boolean random = false;
-    public Runner() {
-    }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        boolean random=false;
 
-
-        /*
+        //sets a flag for creation of random or standard board
         System.out.println("Would you like to play with a random board, or a pre-made one?");
         String move = in.nextLine();
-        if(move.equals("random"))
-        { random = true; }
-        else{random=false;}
-        */
+        if(move.contains("random"))
+        {
+            random = true;
+        }
+
+        Board map = new Board();
+        if(random)
+        {
+            map=new Board(random);
+        }
+
+        //creates either random or pre set board
+        map.create();
 
 
-
-
-        Board.create();
-
+        //creates instances of rooms in the correct position
         Person player1 = new Person("FirstName", "FamilyName", 4, 2);
-        KeyRoom table = new KeyRoom(0,4);
-        OrbRoom crystal = new OrbRoom(2,3);
-        TomeRoom book = new TomeRoom(1,1);
+        KeyRoom table = new KeyRoom(0,Board.keyyloc);
+        OrbRoom crystal = new OrbRoom(2,Board.orbyloc);
+        TomeRoom book = new TomeRoom(1,Board.tomeyloc);
 
 
-
+        //prints backstory and explanation of game
         System.out.println("You are a lone elf who wanders the world, in search of some petty coin and thrills. In a local tavern, you meet a dwarf named Gundran, who claims to be your long lost cousin");
         System.out.println("He tells you that he has a job that he would love you to complete for him, adn that he would reward you handsomely for completing it. He tells you a local story about three mystic artifacts that are supposed to be in the cave.");
         System.out.println("The first, is the Skeleton Key, said to be able to open any lock. The second is the Philosophers Stone, said to be able to create matter from nothing. The third is the Tome of the Elders, said to give the reader the knowledge of 100 one-hundred year old men.");
@@ -45,13 +49,16 @@ public class Runner {
         System.out.println("He says he would do it himself if he didn't have his back problems, and if his favorite cousin wasn't there to help him with it.");
         System.out.println("Gundran leads you to the ruins, and you descend deep into them as he returns back to town.");
 
+
+        //places character in correct starting position
         Board.map[4][2].enterRoom(player1);
 
 
         while(gameOn) {
+            //checks what player will do
             System.out.println("What would you like to do?");
             Board.print(Board.map);
-            String move = in.nextLine();
+            move = in.nextLine();
             if (!validMove(move, player1, Board.map, table,book, crystal)) {
                 System.out.println("Please choose a valid move.");
             }
@@ -63,6 +70,7 @@ public class Runner {
     public static boolean validMove(String move, Person player1, Room[][] map, KeyRoom table,TomeRoom book,OrbRoom crystal) {
         move = move.toLowerCase().trim();
         byte var4 = -1;
+        //checks the different cases for inputs
         switch(move) {
             case "w":
                 {
@@ -122,6 +130,7 @@ public class Runner {
                 return false;
 
             case 8:
+                //returns all possible inventory texts
                 if (!Person.orb&&!Person.tome&&!Person.key)
                 {
                     System.out.println("You currently don't have any artifacts. Get a move on!");
@@ -157,6 +166,7 @@ public class Runner {
                 }
                 return true;
             case 7:
+                //prints instructions for the game
                 System.out.println("Your goal is to retrieve all 3 artifacts within the ruins and bring them to the exit.");
                 System.out.println("Entering rooms that don't contain an artifact has a chance to be dangerous, so try to get from place to place as quickly as possible");
                 System.out.println("MOVEMENT: Use the commands n,s,e,w to go north, south, east and west respectively");
@@ -165,7 +175,7 @@ public class Runner {
                 return true;
 
 
-
+            //sets flags within the room and player to show the change of the artifact location, and prints associated text
             case 4:
                 if ((player1.getxLoc() == table.getxLoc())&&(player1.getyLoc()==table.getyLoc())) {
                     if(KeyRoom.key) {
